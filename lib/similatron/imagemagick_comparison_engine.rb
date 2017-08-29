@@ -10,13 +10,12 @@ module Similatron
     def compare(original:, generated:)
       diff_path = next_diff_path
       exec_output = `#{executable_path} -metric PSNR #{original} #{generated} #{diff_path}`
-      exec_status = $CHILD_STATUS.exitstatus
 
       Comparison.new(
         original: original,
         generated: generated,
-        score: score(exec_output, exec_status),
-        diff: diff(exec_status, diff_path)
+        score: score(exec_output),
+        diff: diff(diff_path)
       )
     end
 
@@ -29,12 +28,20 @@ module Similatron
       File.join(diffs_path, "diff_#{diff_index}.jpg")
     end
 
-    def diff(status, diff_path)
-      status == 1 ? diff_path : nil
+    def last_run_failed?
+      $CHILD_STATUS.exitstatus == 2
     end
 
-    def score(output, status)
-      if status == 2
+    def last_run_eql?
+      $CHILD_STATUS.exitstatus.zero?
+    end
+
+    def diff(diff_path)
+      last_run_eql? ? diff_path : nil
+    end
+
+    def score(output)
+      if last_run_failed?
         100
       else
         output.to_i
