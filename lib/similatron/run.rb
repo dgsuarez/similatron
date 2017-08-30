@@ -18,6 +18,11 @@ module Similatron
       )
     end
 
+    def compare!(original:, generated:)
+      comparison = compare(original: original, generated: generated)
+      comparison.raise_when_different
+    end
+
     private
 
     attr_reader :image_engine

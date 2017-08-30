@@ -13,5 +13,17 @@ module Similatron
       @score.zero?
     end
 
+    def raise_when_different
+      return if same?
+
+      message_parts = [
+        "Found #{generated} different from #{original}\n",
+        "Score: #{score}"
+      ]
+      message_parts << "\nDiff in #{diff}" if diff
+
+      raise StandardError, message_parts.join
+    end
+
   end
 end

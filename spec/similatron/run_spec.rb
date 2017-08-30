@@ -34,4 +34,13 @@ describe Similatron::Run do
     FileUtils.rm_f(original)
   end
 
+  it "can raise an error when the comparison fails" do
+    expect do
+      @run.compare!(
+        original: "spec/assets/bug_1.jpg",
+        generated: "spec/assets/bug_1_rotate.jpg"
+      )
+    end.to raise_error
+  end
+
 end
