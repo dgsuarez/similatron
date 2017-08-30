@@ -1,4 +1,6 @@
 require "English"
+require 'securerandom'
+require 'open3'
 
 require "similatron/version"
 require "similatron/comparison"
