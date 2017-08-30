@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe Similatron::ImagemagickComparisonEngine do
 
-  it "compares the same image to itself and says they are the same" do
-    engine = Similatron::ImagemagickComparisonEngine.new
+  before :each do
+    @engine = Similatron::ImagemagickComparisonEngine.new(run_id: rand)
+  end
 
-    comparison = engine.compare(
+  it "compares the same image to itself and says they are the same" do
+    comparison = @engine.compare(
       original: "spec/assets/bug_1.jpg",
       generated: "spec/assets/bug_1.jpg"
     )
@@ -14,9 +16,7 @@ describe Similatron::ImagemagickComparisonEngine do
   end
 
   it "compares images with different geometry" do
-    engine = Similatron::ImagemagickComparisonEngine.new
-
-    comparison = engine.compare(
+    comparison = @engine.compare(
       original: "spec/assets/bug_1.jpg",
       generated: "spec/assets/bug_2.jpg"
     )
@@ -25,9 +25,7 @@ describe Similatron::ImagemagickComparisonEngine do
   end
 
   it "compares different images with same geometry" do
-    engine = Similatron::ImagemagickComparisonEngine.new
-
-    comparison = engine.compare(
+    comparison = @engine.compare(
       original: "spec/assets/bug_1.jpg",
       generated: "spec/assets/bug_1_rotate.jpg"
     )
@@ -36,9 +34,7 @@ describe Similatron::ImagemagickComparisonEngine do
   end
 
   it "saves a diff file if it can" do
-    engine = Similatron::ImagemagickComparisonEngine.new
-
-    comparison = engine.compare(
+    comparison = @engine.compare(
       original: "spec/assets/bug_1.jpg",
       generated: "spec/assets/bug_1_rotate.jpg"
     )
@@ -47,9 +43,7 @@ describe Similatron::ImagemagickComparisonEngine do
   end
 
   it "doesn't save a diff file if it can't" do
-    engine = Similatron::ImagemagickComparisonEngine.new
-
-    comparison = engine.compare(
+    comparison = @engine.compare(
       original: "spec/assets/bug_1.jpg",
       generated: "spec/assets/bug_2.jpg"
     )

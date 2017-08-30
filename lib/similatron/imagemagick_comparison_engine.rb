@@ -1,11 +1,11 @@
 module Similatron
   class ImagemagickComparisonEngine
 
-    def initialize(executable_path: nil, diffs_path: "tmp/")
+    def initialize(executable_path: nil, diffs_path: "tmp/", run_id:)
       @executable_path = executable_path || "compare"
       @diffs_path = diffs_path
       @diff_index = 0
-      @run_id = SecureRandom.urlsafe_base64(8)
+      @run_id = run_id
     end
 
     def compare(original:, generated:)
