@@ -23,7 +23,7 @@ module Similatron
     attr_reader :image_engine
 
     def force_generation_if_needed(original, generated)
-      FileUtils.cp(original, generated) unless File.exist?(generated)
+      FileUtils.cp(generated, original) unless File.exist?(original)
     end
 
   end

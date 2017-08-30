@@ -21,17 +21,17 @@ describe Similatron::Run do
   end
 
   it "creates a copy of the original if the generated is not there" do
-    generated = "tmp/generated_test.jpg"
-    FileUtils.rm_f(generated)
+    original = "tmp/original_test.jpg"
+    FileUtils.rm_f(original)
 
     @run.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: generated
+      original: original,
+      generated: "spec/assets/bug_1.jpg"
     )
 
-    expect(File.exist?(generated)).to be_truthy
+    expect(File.exist?(original)).to be_truthy
 
-    FileUtils.rm_f("tmp/generated_test.jpg")
+    FileUtils.rm_f(original)
   end
 
 end
