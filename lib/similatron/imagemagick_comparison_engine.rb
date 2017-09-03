@@ -15,8 +15,8 @@ module Similatron
       "jpg"
     end
 
-    def command(original, generated, diff_path)
-      "#{executable_path} -metric PSNR #{original} #{generated} #{diff_path}"
+    def command(expected, actual, diff_path)
+      "#{executable_path} -metric PSNR #{expected} #{actual} #{diff_path}"
     end
 
     def diff(diff_path, exec_result)

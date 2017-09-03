@@ -5,8 +5,8 @@ describe Similatron::Comparison do
   it "can raise an error with all the information about itself" do
 
     comparison = Similatron::Comparison.new(
-      original: "one",
-      generated: "other",
+      expected: "one",
+      actual: "other",
       diff: "some_diff",
       score: 70
     )
@@ -18,8 +18,8 @@ describe Similatron::Comparison do
 
   it "doesn't raise if they are equal" do
     comparison = Similatron::Comparison.new(
-      original: "one",
-      generated: "other",
+      expected: "one",
+      actual: "other",
       diff: nil,
       score: 0
     )
@@ -29,8 +29,8 @@ describe Similatron::Comparison do
 
   it "knows how to turn itself to JSON-like data" do
     args = {
-      original: "one",
-      generated: "other",
+      expected: "one",
+      actual: "other",
       diff: "diff_path.png",
       score: 100
     }

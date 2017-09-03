@@ -9,8 +9,8 @@ describe Similatron::BinaryDiffComparisonEngine do
 
   it "compares the same image to itself and says they are the same" do
     comparison = @engine.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: "spec/assets/bug_1.jpg"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_1.jpg"
     )
 
     expect(comparison.same?).to be_truthy
@@ -18,8 +18,8 @@ describe Similatron::BinaryDiffComparisonEngine do
 
   it "compares different images and says so" do
     comparison = @engine.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: "spec/assets/bug_2.jpg"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_2.jpg"
     )
 
     expect(comparison.same?).to be_falsy
@@ -27,8 +27,8 @@ describe Similatron::BinaryDiffComparisonEngine do
 
   it "never saves a diff file" do
     comparison = @engine.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: "spec/assets/bug_1_rotate.jpg"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_1_rotate.jpg"
     )
 
     expect(comparison.diff).to be_nil

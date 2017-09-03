@@ -15,8 +15,8 @@
     <% overwrite_comparisons.each do |comparison| %>
       <li>
         Original
-        <a href="<%= comparison.original %>">Original</a> not found, copied
-        <a href="<%= comparison.generated %>">generated</a>.
+        <a href="<%= comparison.expected %>">Original</a> not found, copied
+        <a href="<%= comparison.actual %>">actual</a>.
       </li>
     <% end %>
     </ul>
@@ -25,8 +25,8 @@
     <% failed_comparisons.each do |comparison| %>
       <li>
         Failed comparison:
-        Expected <a href="<%= comparison.original %>">original</a>
-        to equal <a href="<%= comparison.generated %>">generated</a>.
+        Expected <a href="<%= comparison.expected %>">expected</a>
+        to equal <a href="<%= comparison.actual %>">actual</a>.
         <% if comparison.diff %>
           <a href="<%= comparison.diff %>">Diff</a>.
         <% end %>

@@ -7,8 +7,8 @@ module Similatron
 
     private
 
-    def command(original, generated, _diff_path)
-      "#{executable_path} #{original} #{generated}"
+    def command(expected, actual, _diff_path)
+      "#{executable_path} #{expected} #{actual}"
     end
 
     def default_executable_path

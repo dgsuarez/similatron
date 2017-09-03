@@ -5,16 +5,16 @@ module Similatron
       @diffs_path = diffs_path
     end
 
-    def compare(original:, generated:)
+    def compare(expected:, actual:)
       diff_path = next_diff_path
 
-      command = command(original, generated, diff_path)
+      command = command(expected, actual, diff_path)
 
       exec_result = run(command)
 
       Comparison.new(
-        original: original,
-        generated: generated,
+        expected: expected,
+        actual: actual,
         score: score(exec_result),
         diff: diff(diff_path, exec_result)
       )

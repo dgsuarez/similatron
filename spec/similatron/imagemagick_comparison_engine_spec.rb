@@ -9,8 +9,8 @@ describe Similatron::ImagemagickComparisonEngine do
 
   it "compares the same image to itself and says they are the same" do
     comparison = @engine.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: "spec/assets/bug_1.jpg"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_1.jpg"
     )
 
     expect(comparison.same?).to be_truthy
@@ -18,8 +18,8 @@ describe Similatron::ImagemagickComparisonEngine do
 
   it "compares images with different geometry" do
     comparison = @engine.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: "spec/assets/bug_2.jpg"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_2.jpg"
     )
 
     expect(comparison.same?).to be_falsy
@@ -27,8 +27,8 @@ describe Similatron::ImagemagickComparisonEngine do
 
   it "compares different images with same geometry" do
     comparison = @engine.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: "spec/assets/bug_1_rotate.jpg"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_1_rotate.jpg"
     )
 
     expect(comparison.same?).to be_falsy
@@ -36,8 +36,8 @@ describe Similatron::ImagemagickComparisonEngine do
 
   it "saves a diff file if it can" do
     comparison = @engine.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: "spec/assets/bug_1_rotate.jpg"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_1_rotate.jpg"
     )
 
     expect(File.size(comparison.diff)).to be > 0
@@ -45,8 +45,8 @@ describe Similatron::ImagemagickComparisonEngine do
 
   it "doesn't save a diff file if it can't" do
     comparison = @engine.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: "spec/assets/bug_2.jpg"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_2.jpg"
     )
 
     expect(comparison.diff).to be_nil

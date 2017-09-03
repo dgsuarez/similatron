@@ -9,8 +9,8 @@ describe Similatron::DiffComparisonEngine do
 
   it "compares the same text to itself and says they are the same" do
     comparison = @engine.compare(
-      original: "spec/assets/bug_1.txt",
-      generated: "spec/assets/bug_1.txt"
+      expected: "spec/assets/bug_1.txt",
+      actual: "spec/assets/bug_1.txt"
     )
 
     expect(comparison.same?).to be_truthy
@@ -18,8 +18,8 @@ describe Similatron::DiffComparisonEngine do
 
   it "compares different texts" do
     comparison = @engine.compare(
-      original: "spec/assets/bug_1.txt",
-      generated: "spec/assets/bug_1_rotate.txt"
+      expected: "spec/assets/bug_1.txt",
+      actual: "spec/assets/bug_1_rotate.txt"
     )
 
     expect(comparison.same?).to be_falsy
@@ -27,8 +27,8 @@ describe Similatron::DiffComparisonEngine do
 
   it "saves a diff file" do
     comparison = @engine.compare(
-      original: "spec/assets/bug_1.txt",
-      generated: "spec/assets/bug_1_rotate.txt"
+      expected: "spec/assets/bug_1.txt",
+      actual: "spec/assets/bug_1_rotate.txt"
     )
 
     expect(File.size(comparison.diff)).to be > 0
@@ -36,8 +36,8 @@ describe Similatron::DiffComparisonEngine do
 
   it "gets a meaningful score" do
     comparison = @engine.compare(
-      original: "spec/assets/bug_1.txt",
-      generated: "spec/assets/bug_1_rotate.txt"
+      expected: "spec/assets/bug_1.txt",
+      actual: "spec/assets/bug_1_rotate.txt"
     )
 
     expect(comparison.score).to eq 2.0

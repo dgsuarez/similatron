@@ -1,6 +1,6 @@
 # Similatron
 
-The laziest way to test generated artifacts.
+The laziest way to test actual artifacts.
 
 `Similatron` compares files. It can make image, text or pure binary
 comparisons.
@@ -8,15 +8,15 @@ comparisons.
 It's designed to be used in tests, so:
 
 * If the files are different, it'll raise an exception
-* If the original file doesn't yet exist, it'll copy the expected one over (so
+* If the expected file doesn't yet exist, it'll copy the expected one over (so
     you can build your tests post-hoc in one go)
 * It can create html/json reports after running, so you'll be able to inspect
-    differences in the generated files, and, when available, have access to
+    differences in the actual files, and, when available, have access to
     a special diff file.
 
 ## Usage
 
-With the following code, 3 things may happen:
+One of the simplest ways to use it is the following:
 
 ```ruby
 
@@ -26,16 +26,18 @@ end
 
 
 it "creates an image for an ugly face" do
-  expected = "spec/assets/original_face.jpg"
+  expected = "spec/assets/expected_face.jpg"
   actual = face_builder.ugly_face(:path => "tmp/ugly.jpg")
 
-  Similatron.compare(original: expected, generated: actual)
+  Similatron.compare(expected: expected, actual: actual)
 end
 
 ```
 
-* If the original exists and is equal to the expected, the spec will pass.
-* If the original face doesn't exist, `tmp/ugly.jpg` will be copied over, and
+Depending on the files...
+
+* If the actual exists and is equal to the expected, the spec will pass.
+* If the expected face doesn't exist, `tmp/ugly.jpg` will be copied over, and
     the spec will not fail.
 * Otherwise, the spec fails.
 

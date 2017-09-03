@@ -21,19 +21,19 @@ module Similatron
       write_reports
     end
 
-    def compare(original:, generated:)
-      comparison = if File.exist?(original)
-                     real_comparison(original, generated)
+    def compare(expected:, actual:)
+      comparison = if File.exist?(expected)
+                     real_comparison(expected, actual)
                    else
-                     copy_comparison(original, generated)
+                     copy_comparison(expected, actual)
                    end
       comparisons << comparison
 
       comparison
     end
 
-    def compare!(original:, generated:)
-      comparison = compare(original: original, generated: generated)
+    def compare!(expected:, actual:)
+      comparison = compare(expected: expected, actual: actual)
       comparison.raise_when_different
     end
 
@@ -67,12 +67,12 @@ module Similatron
 
     attr_reader :run_path, :engines
 
-    def copy_comparison(original, generated)
-      FileUtils.cp(generated, original)
+    def copy_comparison(expected, actual)
+      FileUtils.cp(actual, expected)
       Comparison.new(
         overwrite: true,
-        original: original,
-        generated: generated,
+        expected: expected,
+        actual: actual,
         score: 0
       )
     end
@@ -82,12 +82,12 @@ module Similatron
       engines.detect { |engine| engine.can_handle_mime?(mime_type) }
     end
 
-    def real_comparison(original, generated)
-      engine = best_engine(original)
+    def real_comparison(expected, actual)
+      engine = best_engine(expected)
 
       engine.compare(
-        original: original,
-        generated: generated
+        expected: expected,
+        actual: actual
       )
     end
 

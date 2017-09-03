@@ -9,13 +9,13 @@ describe Similatron::Run do
 
   it "stores the comparisons it does" do
     @run.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: "spec/assets/bug_1.jpg"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_1.jpg"
     )
 
     @run.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: "spec/assets/bug_1_rotate.jpg"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_1_rotate.jpg"
     )
 
     expect(@run.comparisons.size).to eq 2
@@ -23,67 +23,67 @@ describe Similatron::Run do
 
   it "knows the best comparison engine to use" do
     @run.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: "spec/assets/bug_1_rotate.jpg"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_1_rotate.jpg"
     )
 
     @run.compare(
-      original: "spec/assets/bug_1.txt",
-      generated: "spec/assets/bug_1_rotate.txt"
+      expected: "spec/assets/bug_1.txt",
+      actual: "spec/assets/bug_1_rotate.txt"
     )
 
     expect(@run.comparisons.first.diff).to match(/\.jpg/)
     expect(@run.comparisons.last.diff).to match(/\.diff/)
   end
 
-  it "creates a copy of the original if the generated is not there" do
-    original = "tmp/original_test.jpg"
-    FileUtils.rm_f(original)
+  it "creates a copy of the expected if the actual is not there" do
+    expected = "tmp/expected_test.jpg"
+    FileUtils.rm_f(expected)
 
     @run.compare(
-      original: original,
-      generated: "spec/assets/bug_1.jpg"
+      expected: expected,
+      actual: "spec/assets/bug_1.jpg"
     )
 
-    expect(File.exist?(original)).to be_truthy
+    expect(File.exist?(expected)).to be_truthy
 
-    FileUtils.rm_f(original)
+    FileUtils.rm_f(expected)
   end
 
   it "knows that the comparison has overwritten" do
-    original = "tmp/original_test.jpg"
-    FileUtils.rm_f(original)
+    expected = "tmp/expected_test.jpg"
+    FileUtils.rm_f(expected)
 
     @run.compare(
-      original: original,
-      generated: "spec/assets/bug_1.jpg"
+      expected: expected,
+      actual: "spec/assets/bug_1.jpg"
     )
 
     comparison = @run.comparisons.first
 
     expect(comparison.overwrite?).to be_truthy
 
-    FileUtils.rm_f(original)
+    FileUtils.rm_f(expected)
   end
 
   it "can raise an error when the comparison fails" do
     expect do
       @run.compare!(
-        original: "spec/assets/bug_1.jpg",
-        generated: "spec/assets/bug_1_rotate.jpg"
+        expected: "spec/assets/bug_1.jpg",
+        actual: "spec/assets/bug_1_rotate.jpg"
       )
     end.to raise_error(/bug_1.jpg/)
   end
 
   it "creates a JSON report on completion" do
     @run.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: "spec/assets/bug_1.jpg"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_1.jpg"
     )
 
     @run.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: "spec/assets/bug_1_rotate.jpg"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_1_rotate.jpg"
     )
 
     @run.complete
@@ -96,13 +96,13 @@ describe Similatron::Run do
 
   it "creates an HTML report on completion" do
     @run.compare(
-      original: "spec/assets/bug_2.jpg",
-      generated: "spec/assets/bug_2.jpg"
+      expected: "spec/assets/bug_2.jpg",
+      actual: "spec/assets/bug_2.jpg"
     )
 
     @run.compare(
-      original: "spec/assets/bug_1.jpg",
-      generated: "spec/assets/bug_1_rotate.jpg"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_1_rotate.jpg"
     )
 
     @run.complete

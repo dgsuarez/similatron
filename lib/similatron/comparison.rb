@@ -1,11 +1,11 @@
 module Similatron
   class Comparison
 
-    attr_reader :original, :generated, :diff, :score
+    attr_reader :expected, :actual, :diff, :score
 
-    def initialize(original:, generated:, score:, diff: nil, overwrite: nil)
-      @original = original
-      @generated = generated
+    def initialize(expected:, actual:, score:, diff: nil, overwrite: nil)
+      @expected = expected
+      @actual = actual
       @diff = diff
       @score = score
       @overwrite = overwrite
@@ -23,7 +23,7 @@ module Similatron
       return if same?
 
       message_parts = [
-        "Found #{generated} different from #{original}\n",
+        "Found #{actual} different from #{expected}\n",
         "Score: #{score}"
       ]
       message_parts << "\nDiff in #{diff}" if diff
@@ -33,8 +33,8 @@ module Similatron
 
     def as_json
       {
-        original: original,
-        generated: generated,
+        expected: expected,
+        actual: actual,
         diff: diff,
         score: score,
         same: !!same?, # rubocop:disable Style/DoubleNegation
