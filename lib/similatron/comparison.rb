@@ -3,15 +3,20 @@ module Similatron
 
     attr_reader :original, :generated, :diff, :score
 
-    def initialize(original:, generated:, score:, diff: nil)
+    def initialize(original:, generated:, score:, diff: nil, overwrite: nil)
       @original = original
       @generated = generated
       @diff = diff
       @score = score
+      @overwrite = overwrite
     end
 
     def same?
       @score.zero?
+    end
+
+    def overwrite?
+      @overwrite
     end
 
     def raise_when_different
@@ -32,7 +37,8 @@ module Similatron
         generated: generated,
         diff: diff,
         score: score,
-        same: !!same? # rubocop:disable Style/DoubleNegation
+        same: !!same?, # rubocop:disable Style/DoubleNegation
+        overwrite: !!overwrite? # rubocop:disable Style/DoubleNegation
       }
     end
 

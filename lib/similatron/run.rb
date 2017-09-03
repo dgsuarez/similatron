@@ -13,12 +13,11 @@ module Similatron
     end
 
     def compare(original:, generated:)
-      force_generation_if_needed(original, generated)
-
-      comparison = image_engine.compare(
-        original: original,
-        generated: generated
-      )
+      comparison = if File.exist?(original)
+                     real_comparison(original, generated)
+                   else
+                     copy_comparison(original, generated)
+                   end
       comparisons << comparison
 
       comparison
@@ -59,8 +58,21 @@ module Similatron
 
     attr_reader :image_engine, :run_path
 
-    def force_generation_if_needed(original, generated)
-      FileUtils.cp(generated, original) unless File.exist?(original)
+    def copy_comparison(original, generated)
+      FileUtils.cp(generated, original)
+      Comparison.new(
+        overwrite: true,
+        original: original,
+        generated: generated,
+        score: 0
+      )
+    end
+
+    def real_comparison(original, generated)
+      image_engine.compare(
+        original: original,
+        generated: generated
+      )
     end
 
   end

@@ -34,6 +34,22 @@ describe Similatron::Run do
     FileUtils.rm_f(original)
   end
 
+  it "knows that the comparison has overwritten" do
+    original = "tmp/original_test.jpg"
+    FileUtils.rm_f(original)
+
+    @run.compare(
+      original: original,
+      generated: "spec/assets/bug_1.jpg"
+    )
+
+    comparison = @run.comparisons.first
+
+    expect(comparison.overwrite?).to be_truthy
+
+    FileUtils.rm_f(original)
+  end
+
   it "can raise an error when the comparison fails" do
     expect do
       @run.compare!(

@@ -36,7 +36,7 @@ describe Similatron::Comparison do
     }
     comparison = Similatron::Comparison.new(args)
 
-    expect(comparison.as_json).to eq(args.merge(same: false))
+    expect(comparison.as_json).to eq(args.merge(same: false, overwrite: false))
   end
 
 end
