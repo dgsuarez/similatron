@@ -2,7 +2,7 @@
 
 The laziest way to test generated artifacts.
 
-`Similatron` compares files. It can make image, text or pure binary
+`Similatron` compares files. It can make image, pdf, text or pure binary
 comparisons.
 
 It's designed to be used in tests, so:
@@ -12,7 +12,7 @@ It's designed to be used in tests, so:
     you can build your tests post-hoc in one go)
 * It can create html/json reports after running, so you'll be able to inspect
     differences in the actual files, and, when available, have access to
-    a special diff file.
+    a file with the differences as computed.
 
 ## Usage
 
