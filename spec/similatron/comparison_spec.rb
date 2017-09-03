@@ -27,4 +27,16 @@ describe Similatron::Comparison do
     expect { comparison.raise_when_different }.to_not raise_error
   end
 
+  it "knows how to turn itself to JSON-like data" do
+    args = {
+      original: "one",
+      generated: "other",
+      diff: "diff_path.png",
+      score: 100
+    }
+    comparison = Similatron::Comparison.new(args)
+
+    expect(comparison.as_json).to eq(args.merge(same: false))
+  end
+
 end

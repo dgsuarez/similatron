@@ -3,6 +3,6 @@ require 'similatron'
 
 RSpec.configure do |config|
   config.before :suite do
-    FileUtils.rm_r("tmp/")
+    FileUtils.rm_rf("tmp/")
   end
 end

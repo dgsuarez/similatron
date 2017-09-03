@@ -40,7 +40,37 @@ describe Similatron::Run do
         original: "spec/assets/bug_1.jpg",
         generated: "spec/assets/bug_1_rotate.jpg"
       )
-    end.to raise_error
+    end.to raise_error(/bug_1.jpg/)
+  end
+
+  it "creates a JSON report of the comparisons it's seen" do
+    @run.compare(
+      original: "spec/assets/bug_1.jpg",
+      generated: "spec/assets/bug_1.jpg"
+    )
+
+    @run.compare(
+      original: "spec/assets/bug_1.jpg",
+      generated: "spec/assets/bug_1_rotate.jpg"
+    )
+
+    expect(@run.to_json).to match(/"same":true/)
+    expect(@run.to_json).to match(/"same":false/)
+  end
+
+  it "creates an HTML report" do
+    @run.compare(
+      original: "spec/assets/bug_2.jpg",
+      generated: "spec/assets/bug_2.jpg"
+    )
+
+    @run.compare(
+      original: "spec/assets/bug_1.jpg",
+      generated: "spec/assets/bug_1_rotate.jpg"
+    )
+
+    expect(@run.to_html).to_not match(/bug_2/)
+    expect(@run.to_html).to match(/bug_1/)
   end
 
 end

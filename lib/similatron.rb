@@ -1,6 +1,8 @@
 require "English"
 require 'securerandom'
 require 'open3'
+require 'json'
+require 'erb'
 
 require "similatron/version"
 require "similatron/comparison"
