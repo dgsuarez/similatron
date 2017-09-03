@@ -1,6 +1,6 @@
 # Similatron
 
-The laziest way to test actual artifacts.
+The laziest way to test generated artifacts.
 
 `Similatron` compares files. It can make image, text or pure binary
 comparisons.
