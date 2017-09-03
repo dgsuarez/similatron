@@ -3,14 +3,24 @@
     <meta charset="utf-8">
 
     <title>Similatron report</title>
-    <meta name="description" content="The HTML5 Herald">
-    <meta name="author" content="SitePoint">
+    <meta name="description" content="Similatron report">
+    <meta name="author" content="Similatron">
   </head>
 
   <body>
     <p>
-      Did <%= comparisons.length %> checks, <%= failed_comparisons.length %> Failures.
+      Did <%= comparisons.length %> checks with <%= failed_comparisons.length %> failures and <%= overwrite_comparisons.length %> new files.
     </p>
+    <ul>
+    <% overwrite_comparisons.each do |comparison| %>
+      <li>
+        Original
+        <a href="<%= comparison.original %>">Original</a> not found, copied
+        <a href="<%= comparison.generated %>">generated</a>.
+      </li>
+    <% end %>
+    </ul>
+
     <ul>
     <% failed_comparisons.each do |comparison| %>
       <li>

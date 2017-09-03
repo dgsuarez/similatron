@@ -54,6 +54,10 @@ module Similatron
       comparisons.reject(&:same?)
     end
 
+    def overwrite_comparisons
+      comparisons.select(&:overwrite?)
+    end
+
     private
 
     attr_reader :image_engine, :run_path
