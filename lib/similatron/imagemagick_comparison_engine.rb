@@ -1,10 +1,18 @@
 module Similatron
   class ImagemagickComparisonEngine < ComparisonEngine
 
+    def can_handle_mime?(mime_type)
+      mime_type =~ /image/
+    end
+
     private
 
     def default_executable_path
       "compare"
+    end
+
+    def diff_extension
+      "jpg"
     end
 
     def command(original, generated, diff_path)

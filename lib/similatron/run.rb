@@ -6,7 +6,12 @@ module Similatron
     def start(base_path: "tmp")
       run_id = SecureRandom.urlsafe_base64(8)
       @run_path = File.join(base_path, "run_#{run_id}")
-      @image_engine = ImagemagickComparisonEngine.new(diffs_path: run_path)
+
+      @engines = [
+        ImagemagickComparisonEngine.new(diffs_path: run_path),
+        DiffComparisonEngine.new(diffs_path: run_path),
+        BinaryDiffComparisonEngine.new(diffs_path: run_path)
+      ]
 
       @comparisons = []
       FileUtils.mkdir_p(run_path)
@@ -60,7 +65,7 @@ module Similatron
 
     private
 
-    attr_reader :image_engine, :run_path
+    attr_reader :run_path, :engines
 
     def copy_comparison(original, generated)
       FileUtils.cp(generated, original)
@@ -72,8 +77,15 @@ module Similatron
       )
     end
 
+    def best_engine(file)
+      mime_type = `file --mime -b #{file}`.chomp
+      engines.detect { |engine| engine.can_handle_mime?(mime_type) }
+    end
+
     def real_comparison(original, generated)
-      image_engine.compare(
+      engine = best_engine(original)
+
+      engine.compare(
         original: original,
         generated: generated
       )

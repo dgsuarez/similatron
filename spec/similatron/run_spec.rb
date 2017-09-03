@@ -21,6 +21,21 @@ describe Similatron::Run do
     expect(@run.comparisons.size).to eq 2
   end
 
+  it "knows the best comparison engine to use" do
+    @run.compare(
+      original: "spec/assets/bug_1.jpg",
+      generated: "spec/assets/bug_1_rotate.jpg"
+    )
+
+    @run.compare(
+      original: "spec/assets/bug_1.txt",
+      generated: "spec/assets/bug_1_rotate.txt"
+    )
+
+    expect(@run.comparisons.first.diff).to match(/\.jpg/)
+    expect(@run.comparisons.last.diff).to match(/\.diff/)
+  end
+
   it "creates a copy of the original if the generated is not there" do
     original = "tmp/original_test.jpg"
     FileUtils.rm_f(original)

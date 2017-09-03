@@ -33,7 +33,7 @@ module Similatron
       @diff_index ||= 0
       @diff_index += 1
 
-      File.join(diffs_path, "diff_#{diff_index}.diff")
+      File.join(diffs_path, "diff_#{diff_index}.#{diff_extension}")
     end
 
     def executable_path

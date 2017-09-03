@@ -1,6 +1,10 @@
 module Similatron
   class DiffComparisonEngine < ComparisonEngine
 
+    def can_handle_mime?(mime_type)
+      mime_type !~ /charset=binary/
+    end
+
     private
 
     def command(original, generated, _diff_path)
@@ -8,6 +12,10 @@ module Similatron
     end
 
     def default_executable_path
+      "diff"
+    end
+
+    def diff_extension
       "diff"
     end
 
