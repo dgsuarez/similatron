@@ -7,6 +7,7 @@ require 'erb'
 require "similatron/version"
 require "similatron/comparison"
 require "similatron/imagemagick_comparison_engine"
+require "similatron/diff_comparison_engine"
 require "similatron/run"
 
 module Similatron
