@@ -38,9 +38,17 @@ module Similatron
       template.result(binding)
     end
 
+    def json_report_path
+      File.join(run_path, "report.json")
+    end
+
+    def html_report_path
+      File.join(run_path, "report.html")
+    end
+
     def write_reports
-      File.write(File.join(run_path, "report.html"), to_html)
-      File.write(File.join(run_path, "report.json"), to_json)
+      File.write(html_report_path, to_html)
+      File.write(json_report_path, to_json)
     end
 
     def failed_comparisons
