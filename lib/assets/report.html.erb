@@ -9,17 +9,19 @@
 
   <body>
     <p>
-      Did <%= comparisons.length %> checks!
+      Did <%= comparisons.length %> checks, <%= failed_comparisons.length %> Failures.
     </p>
+    <ul>
     <% failed_comparisons.each do |comparison| %>
-      <div>
+      <li>
         Failed comparison:
         Expected <a href="<%= comparison.original %>">original</a>
         to equal <a href="<%= comparison.generated %>">generated</a>.
         <% if comparison.diff %>
           <a href="<%= comparison.diff %>">Diff</a>.
         <% end %>
-      </div>
+      </li>
     <% end %>
+    </ul>
   </body>
 </html>

@@ -1,11 +1,10 @@
 module Similatron
   class ImagemagickComparisonEngine
 
-    def initialize(executable_path: nil, diffs_path: "tmp/", run_id:)
+    def initialize(executable_path: nil, diffs_path:)
       @executable_path = executable_path || "compare"
       @diffs_path = diffs_path
       @diff_index = 0
-      @run_id = run_id
     end
 
     def compare(original:, generated:)
@@ -24,12 +23,11 @@ module Similatron
 
     private
 
-    attr_reader :executable_path, :diffs_path, :diff_index, :run_id
+    attr_reader :executable_path, :diffs_path, :diff_index
 
     def next_diff_path
-      FileUtils.mkdir_p(diffs_path)
       @diff_index += 1
-      File.join(diffs_path, "diff_#{run_id}_#{diff_index}.jpg")
+      File.join(diffs_path, "diff_#{diff_index}.jpg")
     end
 
     def diff(diff_path, exec_status)

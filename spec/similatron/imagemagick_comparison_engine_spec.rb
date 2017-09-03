@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Similatron::ImagemagickComparisonEngine do
 
   before :each do
-    @engine = Similatron::ImagemagickComparisonEngine.new(run_id: rand)
+    FileUtils.mkdir_p("tmp/diffs")
+    @engine = Similatron::ImagemagickComparisonEngine.new(diffs_path: "tmp/diffs")
   end
 
   it "compares the same image to itself and says they are the same" do

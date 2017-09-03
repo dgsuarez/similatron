@@ -3,10 +3,13 @@ module Similatron
 
     attr_reader :comparisons
 
-    def initialize
+    def initialize(base_path: "tmp")
       run_id = SecureRandom.urlsafe_base64(8)
-      @image_engine = ImagemagickComparisonEngine.new(run_id: run_id)
+      @run_path = File.join(base_path, "run_#{run_id}")
+      @image_engine = ImagemagickComparisonEngine.new(diffs_path: run_path)
+
       @comparisons = []
+      FileUtils.mkdir_p(run_path)
     end
 
     def compare(original:, generated:)
@@ -35,13 +38,18 @@ module Similatron
       template.result(binding)
     end
 
+    def write_reports
+      File.write(File.join(run_path, "report.html"), to_html)
+      File.write(File.join(run_path, "report.json"), to_json)
+    end
+
     def failed_comparisons
       comparisons.reject(&:same?)
     end
 
     private
 
-    attr_reader :image_engine
+    attr_reader :image_engine, :run_path
 
     def force_generation_if_needed(original, generated)
       FileUtils.cp(generated, original) unless File.exist?(original)
