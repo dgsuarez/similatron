@@ -61,6 +61,8 @@ Or install it yourself as:
 
     $ gem install similatron
 
+`Similatron` needs Imagemagick (to compare images), and a standard
+implementation of `diff`.
 
 ## Development
 
