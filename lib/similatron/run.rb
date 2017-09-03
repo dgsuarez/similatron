@@ -32,6 +32,16 @@ module Similatron
       comparison.raise_when_different
     end
 
+    def summary
+      return "" if failed_comparisons.empty? && overwrite_comparisons.empty?
+      [
+        "Similatron report:",
+        "#{failed_comparisons.count} failures.",
+        "#{overwrite_comparisons.count} new files.",
+        "Report may be found in #{html_report_path}"
+      ].join("\n")
+    end
+
     def json_report_path
       File.join(run_path, "report.json")
     end

@@ -10,5 +10,20 @@ require "similatron/imagemagick_comparison_engine"
 require "similatron/run"
 
 module Similatron
+  def self.compare(*args)
+    run.compare!(*args)
+  end
 
+  def self.complete
+    run.complete
+    puts run.summary
+  end
+
+  def self.run
+    @run ||= begin
+               run = Run.new
+               run.start
+               run
+             end
+  end
 end
