@@ -10,7 +10,11 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Diego Guerra"]
   spec.email         = ["diego.guerra.suarez@gmail.com"]
 
-  spec.summary       = 'Check image similarities'
+  spec.summary       = 'Find similarities between files'
+  spec.description   =
+    "Similatron reports similarities between images, PDFs, or plain text files." \
+    "It's particularly useful for tests for image generating functionalities"
+  spec.homepage      = "https://github.com/dgsuarez/similatron"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
