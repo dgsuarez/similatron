@@ -23,15 +23,15 @@
         <div class="four columns">
           <p>
             <h3>
-              Did <%= comparisons.length %> checks with <%= failed_comparisons.length %> failures
-              and <%= overwrite_comparisons.length %> new files.
+              Did <%= run.comparisons.length %> checks with <%= run.failed_comparisons.length %> failures
+              and <%= run.overwrite_comparisons.length %> new files.
             </h3>
           </p>
         </div>
 
         <div class="eight columns">
           <ul>
-            <% overwrite_comparisons.each do |comparison| %>
+            <% run.overwrite_comparisons.each do |comparison| %>
               <li>
                 Original
                 <a href="<%= File.expand_path(comparison.expected) %>">Original</a> not found, copied
@@ -41,7 +41,7 @@
           </ul>
 
           <ul>
-            <% failed_comparisons.each do |comparison| %>
+            <% run.failed_comparisons.each do |comparison| %>
               <li>
                 Failed comparison:
                 Expected <a href="<%= File.expand_path(comparison.expected) %>">expected</a>

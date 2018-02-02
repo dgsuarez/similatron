@@ -59,13 +59,6 @@ module Similatron
       comparisons.select(&:overwrite?)
     end
 
-    def css_styles
-      ["normalize.css", "skeleton.css"].map do |file|
-        css_path = File.join(Similatron.lib_path, "assets/Skeleton-2.0.4/css", file)
-        File.read(css_path)
-      end
-    end
-
     private
 
     attr_reader :run_path, :engines
@@ -111,9 +104,7 @@ module Similatron
     end
 
     def to_html
-      template_path = File.join(Similatron.lib_path, "assets/report.html.erb")
-      template = ERB.new(File.read(template_path))
-      template.result(binding)
+      HtmlReport.new(self).render
     end
 
     def write_reports

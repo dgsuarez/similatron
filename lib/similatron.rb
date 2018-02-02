@@ -14,6 +14,7 @@ require "similatron/pdf_comparison_engine"
 require "similatron/diff_comparison_engine"
 require "similatron/binary_diff_comparison_engine"
 require "similatron/run"
+require "similatron/html_report"
 
 module Similatron
   def self.compare(*args)
