@@ -2,36 +2,58 @@
   <head>
     <meta charset="utf-8">
 
-    <title>Similatron report</title>
+    <title>Similatron report run at <%= Time.now.strftime("%b %d, %Y %H:%M") %></title>
     <meta name="description" content="Similatron report">
     <meta name="author" content="Similatron">
+    <style>
+      <% css_styles.each do |style| %>
+        <%= style %>
+      <% end %>
+    </style>
   </head>
 
   <body>
-    <p>
-      Did <%= comparisons.length %> checks with <%= failed_comparisons.length %> failures and <%= overwrite_comparisons.length %> new files.
-    </p>
-    <ul>
-    <% overwrite_comparisons.each do |comparison| %>
-      <li>
-        Original
-        <a href="<%= comparison.expected %>">Original</a> not found, copied
-        <a href="<%= comparison.actual %>">actual</a>.
-      </li>
-    <% end %>
-    </ul>
+    <div class="container">
+      <div class="row">
+        <h1 class="six columns">
+          Similatron report
+        </h1>
+      </div>
+      <div class="row">
+        <div class="four columns">
+          <p>
+            <h3>
+              Did <%= comparisons.length %> checks with <%= failed_comparisons.length %> failures
+              and <%= overwrite_comparisons.length %> new files.
+            </h3>
+          </p>
+        </div>
 
-    <ul>
-    <% failed_comparisons.each do |comparison| %>
-      <li>
-        Failed comparison:
-        Expected <a href="<%= comparison.expected %>">expected</a>
-        to equal <a href="<%= comparison.actual %>">actual</a>.
-        <% if comparison.diff %>
-          <a href="<%= comparison.diff %>">Diff</a>.
-        <% end %>
-      </li>
-    <% end %>
-    </ul>
+        <div class="eight columns">
+          <ul>
+            <% overwrite_comparisons.each do |comparison| %>
+              <li>
+                Original
+                <a href="<%= File.expand_path(comparison.expected) %>">Original</a> not found, copied
+                <a href="<%= File.expand_path(comparison.actual) %>">actual</a>.
+              </li>
+            <% end %>
+          </ul>
+
+          <ul>
+            <% failed_comparisons.each do |comparison| %>
+              <li>
+                Failed comparison:
+                Expected <a href="<%= File.expand_path(comparison.expected) %>">expected</a>
+                to equal <a href="<%= File.expand_path(comparison.actual) %>">actual</a>.
+                <% if comparison.diff %>
+                  <a href="<%= File.expand_path(comparison.diff) %>">Diff</a>.
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

@@ -59,6 +59,13 @@ module Similatron
       comparisons.select(&:overwrite?)
     end
 
+    def css_styles
+      ["normalize.css", "skeleton.css"].map do |file|
+        css_path = File.join(Similatron.lib_path, "assets/Skeleton-2.0.4/css", file)
+        File.read(css_path)
+      end
+    end
+
     private
 
     attr_reader :run_path, :engines
