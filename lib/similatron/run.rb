@@ -96,7 +96,8 @@ module Similatron
     end
 
     def to_html
-      template = ERB.new(File.read("lib/assets/report.html.erb"))
+      template_path = File.join(Similatron.lib_path, "assets/report.html.erb")
+      template = ERB.new(File.read(template_path))
       template.result(binding)
     end
 

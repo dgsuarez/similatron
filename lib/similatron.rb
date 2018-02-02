@@ -3,6 +3,7 @@ require 'securerandom'
 require 'open3'
 require 'json'
 require 'erb'
+require 'fileutils'
 
 require "similatron/version"
 require "similatron/comparison"
@@ -28,5 +29,9 @@ module Similatron
                run.start
                run
              end
+  end
+
+  def self.lib_path
+    File.dirname(__FILE__)
   end
 end
