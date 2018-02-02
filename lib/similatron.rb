@@ -4,11 +4,13 @@ require 'open3'
 require 'json'
 require 'erb'
 require 'fileutils'
+require 'tmpdir'
 
 require "similatron/version"
 require "similatron/comparison"
 require "similatron/comparison_engine"
 require "similatron/imagemagick_comparison_engine"
+require "similatron/pdf_comparison_engine"
 require "similatron/diff_comparison_engine"
 require "similatron/binary_diff_comparison_engine"
 require "similatron/run"

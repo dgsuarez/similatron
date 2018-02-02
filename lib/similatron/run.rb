@@ -7,11 +7,7 @@ module Similatron
       run_id = SecureRandom.urlsafe_base64(8)
       @run_path = File.join(base_path, "run_#{run_id}")
 
-      @engines = [
-        ImagemagickComparisonEngine.new(diffs_path: run_path),
-        DiffComparisonEngine.new(diffs_path: run_path),
-        BinaryDiffComparisonEngine.new(diffs_path: run_path)
-      ]
+      @engines = build_engines
 
       @comparisons = []
       FileUtils.mkdir_p(run_path)
@@ -75,6 +71,18 @@ module Similatron
         actual: actual,
         score: 0
       )
+    end
+
+    def build_engines
+      engine_classes = [
+        PdfComparisonEngine,
+        ImagemagickComparisonEngine,
+        DiffComparisonEngine,
+        BinaryDiffComparisonEngine
+      ]
+      engine_classes.map do |engine_class|
+        engine_class.new(diffs_path: run_path)
+      end
     end
 
     def best_engine(file)

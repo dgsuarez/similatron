@@ -2,9 +2,7 @@ module Similatron
   class ImagemagickComparisonEngine < ComparisonEngine
 
     def can_handle_mime?(mime_type)
-      [/image/, /application.pdf/].any? do |format|
-        mime_type =~ format
-      end
+      mime_type =~ /image/
     end
 
     private
