@@ -20,7 +20,7 @@ module Similatron
 
     def image_magick_engine
       ImagemagickComparisonEngine.new(
-        executable_path: @executable_path,
+        executable_path: given_executable_path,
         diffs_path: diffs_path
       )
     end

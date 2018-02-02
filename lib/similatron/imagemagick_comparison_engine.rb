@@ -19,7 +19,7 @@ module Similatron
       "#{executable_path} -metric PSNR #{expected} #{actual} #{diff_path}"
     end
 
-    def diff(diff_path, exec_result)
+    def diff(exec_result)
       exec_result.status == 1 ? diff_path : nil
     end
 

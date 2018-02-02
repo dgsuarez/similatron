@@ -19,7 +19,7 @@ module Similatron
       "notused"
     end
 
-    def diff(_diff_path, _exec_result)
+    def diff(_exec_result)
       nil
     end
 

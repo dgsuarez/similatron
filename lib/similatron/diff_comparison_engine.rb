@@ -19,7 +19,7 @@ module Similatron
       "diff"
     end
 
-    def diff(diff_path, exec_result)
+    def diff(exec_result)
       if exec_result.status != 0
         File.write(diff_path, exec_result.out)
         diff_path
