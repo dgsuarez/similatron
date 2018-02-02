@@ -2,56 +2,72 @@
   <head>
     <meta charset="utf-8">
 
-    <title>Similatron report run at <%= Time.now.strftime("%b %d, %Y %H:%M") %></title>
+    <title>Similatron report run at <%= @run_at %></title>
     <meta name="description" content="Similatron report">
     <meta name="author" content="Similatron">
     <style>
       <% css_styles.each do |style| %>
         <%= style %>
       <% end %>
+
+      small {
+        font-size: 1.5rem;
+      }
     </style>
   </head>
 
   <body>
     <div class="container">
       <div class="row">
-        <h1 class="six columns">
+        <h1 class="twelve columns">
           Similatron report
+          <small>
+            <%= run_at %>.
+          </small>
         </h1>
       </div>
       <div class="row">
-        <div class="four columns">
-          <p>
-            <h3>
+        <div class="twelve columns">
+          <h4>
+            <% if ok? %>
+              Nothing to report!
+            <% else %>
               Did <%= run.comparisons.length %> checks with <%= run.failed_comparisons.length %> failures
               and <%= run.overwrite_comparisons.length %> new files.
-            </h3>
-          </p>
+            <% end %>
+          </h4>
         </div>
+      </div>
 
-        <div class="eight columns">
-          <ul>
-            <% run.overwrite_comparisons.each do |comparison| %>
-              <li>
-                Original
-                <a href="<%= File.expand_path(comparison.expected) %>">Original</a> not found, copied
-                <a href="<%= File.expand_path(comparison.actual) %>">actual</a>.
-              </li>
-            <% end %>
-          </ul>
+      <div class="row">
+        <div class="twelve columns">
+          <% if overwrites? %>
+            <h5>Newly generated files</h5>
+            <ul>
+              <% run.overwrite_comparisons.each do |comparison| %>
+                <li>
+                  Original
+                  <a href="<%= full_path comparison.expected %>"><%= comparison.expected %></a> not found, copied
+                  <a href="<%= full_path comparison.actual %>"><%= comparison.actual %></a>.
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
 
-          <ul>
-            <% run.failed_comparisons.each do |comparison| %>
-              <li>
-                Failed comparison:
-                Expected <a href="<%= File.expand_path(comparison.expected) %>">expected</a>
-                to equal <a href="<%= File.expand_path(comparison.actual) %>">actual</a>.
-                <% if comparison.diff %>
-                  <a href="<%= File.expand_path(comparison.diff) %>">Diff</a>.
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
+          <% if failures? %>
+            <h5>Failed comparisons</h5>
+            <ul>
+              <% run.failed_comparisons.each do |comparison| %>
+                <li>
+                  Expected <a href="<%= full_path comparison.expected %>"><%= comparison.expected%></a>
+                  to equal <a href="<%= full_path comparison.actual %>"><%= comparison.actual %></a>.
+                  <% if comparison.diff %>
+                    <a href="<%= full_path comparison.diff %>">Check out the diff</a>.
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          <%end%>
         </div>
       </div>
     </div>

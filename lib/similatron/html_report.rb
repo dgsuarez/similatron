@@ -5,6 +5,7 @@ module Similatron
 
     def initialize(run)
       @run = run
+      @time = Time.now
     end
 
     def render
@@ -18,6 +19,26 @@ module Similatron
         css_path = File.join(Similatron.lib_path, "assets/Skeleton-2.0.4/css", file)
         File.read(css_path)
       end
+    end
+
+    def full_path(path)
+      File.expand_path(path)
+    end
+
+    def run_at
+      @time.strftime("%b %d, %Y %H:%M")
+    end
+
+    def overwrites?
+      !run.overwrite_comparisons.empty?
+    end
+
+    def failures?
+      !run.failed_comparisons.empty?
+    end
+
+    def ok?
+      !overwrites? && !failures?
     end
 
   end
