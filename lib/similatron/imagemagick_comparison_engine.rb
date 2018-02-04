@@ -24,10 +24,12 @@ module Similatron
     end
 
     def score(exec_result)
-      if exec_result.status == 2
-        100
-      else
+      if exec_result.status.zero?
+        0
+      elsif exec_result.err =~ /^[\.0-9]+$/
         exec_result.err.to_i
+      else
+        100
       end
     end
 

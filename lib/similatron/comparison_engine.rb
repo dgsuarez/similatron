@@ -49,8 +49,6 @@ module Similatron
         @out = out
         @err = err
         @status = status.exitstatus
-
-        p "OUT", @out, "ERR", @err, "STATUS", @status
       end
     end
 
