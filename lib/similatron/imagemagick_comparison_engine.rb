@@ -20,17 +20,21 @@ module Similatron
     end
 
     def diff(exec_result)
-      exec_result.status == 1 ? diff_path : nil
+      could_calculate_score?(exec_result) ? diff_path : nil
     end
 
     def score(exec_result)
-      if exec_result.status.zero?
-        0
-      elsif exec_result.err =~ /^[\.0-9]+$/
+      if could_calculate_score?(exec_result)
         exec_result.err.to_i
+      elsif exec_result.status.zero?
+        0
       else
         100
       end
+    end
+
+    def could_calculate_score?(exec_result)
+      exec_result.err =~ /^[\.0-9]+$/
     end
 
   end
