@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dgsuarez/similatron.svg?branch=master)](https://travis-ci.org/dgsuarez/similatron)
+
 # Similatron
 
 The laziest way to test generated artifacts.
@@ -7,12 +9,12 @@ comparisons.
 
 It's designed to be used in tests, so:
 
-* If the files are different, it'll raise an exception
-* If the expected file doesn't yet exist, it'll copy the expected one over (so
-    you can build your tests post-hoc in one go)
-* It can create html/json reports after running, so you'll be able to inspect
-    differences in the actual files, and, when available, have access to
-    a file with the differences as computed.
+- If the files are different, it'll raise an exception
+- If the expected file doesn't yet exist, it'll copy the expected one over (so
+  you can build your tests post-hoc in one go)
+- It can create html/json reports after running, so you'll be able to inspect
+  differences in the actual files, and, when available, have access to
+  a file with the differences as computed.
 
 ## Usage
 
@@ -36,14 +38,13 @@ end
 
 Depending on the files...
 
-* If the actual exists and is equal to the expected, the spec will pass.
-* If the expected face doesn't exist, `tmp/ugly.jpg` will be copied over, and
-    the spec will not fail.
-* Otherwise, the spec fails.
+- If the actual exists and is equal to the expected, the spec will pass.
+- If the expected face doesn't exist, `tmp/ugly.jpg` will be copied over, and
+  the spec will not fail.
+- Otherwise, the spec fails.
 
 Whenever the images are not equal, an html report is generated so you can
 check the reasons for the failure.
-
 
 ## Installation
 
@@ -77,9 +78,7 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 Bug reports and pull requests are welcome on GitHub at
 https://github.com/dgsuarez/similatron.
 
-
 ## License
 
 The gem is available as open source under the terms of the [MIT
 License](http://opensource.org/licenses/MIT).
-
