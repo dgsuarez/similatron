@@ -23,8 +23,8 @@ describe Similatron::Run do
 
   it "knows the best comparison engine to use" do
     @run.compare(
-      expected: "spec/assets/bug.pdf",
-      actual: "spec/assets/no_bug.pdf"
+      expected: "spec/assets/bug_1.jpg",
+      actual: "spec/assets/bug_1_rotate.jpg"
     )
 
     @run.compare(
