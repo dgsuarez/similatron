@@ -46,7 +46,7 @@ describe Similatron::ImagemagickComparisonEngine do
   it "doesn't save a diff file if it can't" do
     comparison = @engine.compare(
       expected: "spec/assets/bug_1.jpg",
-      actual: "spec/assets/bug_2.jpg"
+      actual: "spec/assets/bug_2.txt"
     )
 
     expect(comparison.diff).to be_nil
