@@ -75,6 +75,7 @@ module Similatron
 
     def build_engines
       engine_classes = [
+        PdfComparisonEngine,
         ImagemagickComparisonEngine,
         DiffComparisonEngine,
         BinaryDiffComparisonEngine

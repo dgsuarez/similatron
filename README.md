@@ -4,7 +4,7 @@
 
 The laziest way to test generated artifacts.
 
-`Similatron` compares files. It can make image, text or pure binary
+`Similatron` compares files. It can make image, pdf, text or pure binary
 comparisons.
 
 It's designed to be used in tests, so:
@@ -45,10 +45,6 @@ Depending on the files...
 
 Whenever the images are not equal, an html report is generated so you can
 check the reasons for the failure.
-
-*NOTE* Some imagemagick versions don't allow PDF manipulation by default due to
-security concerns. Until this can be fixed PDF comparison will be done in
-binary mode
 
 ## Installation
 
