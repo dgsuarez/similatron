@@ -1,5 +1,11 @@
 [![Build Status](https://travis-ci.org/dgsuarez/similatron.svg?branch=master)](https://travis-ci.org/dgsuarez/similatron)
 
+# NOTE
+
+I'm no longer actively maintaining this project, I'll be happy to review
+contributions and if there's enough interest transfer the ownership. Please
+check the issues before using (for example https://github.com/dgsuarez/similatron/issues/11)
+
 # Similatron
 
 The laziest way to test generated artifacts.
